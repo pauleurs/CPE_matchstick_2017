@@ -11,6 +11,7 @@ SRC	=	src/main.c	\
 		src/my_strlen.c	\
 		src/check_nb_line.c	\
 		src/print.c	\
+		src/check_win.c	\
 		src/check_match.c	\
 		src/my_put_nbr.c	\
 		src/get_next_line.c	\

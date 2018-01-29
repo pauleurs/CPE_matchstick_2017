@@ -26,7 +26,7 @@ void print_resume(int line,int matches, int player)
 	if (player == 0)
 		my_putstr("Player removed ");
 	else
-		my_putstr("IA removed");
+		my_putstr("IA removed ");
 	my_put_nbr(matches);
 	my_putstr(" match(es) from line ");
 	my_put_nbr(line);
