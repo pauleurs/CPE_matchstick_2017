@@ -19,6 +19,7 @@ void print_map(char **map)
 		write(1, "\n", 1);
 		i = i + 1;
 	}
+	write(1, "\n", 1);
 }
 
 void print_resume(int line,int matches, int player)
