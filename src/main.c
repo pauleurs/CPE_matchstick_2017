@@ -91,7 +91,15 @@ char **management_ia(char **map, int max_matches)
 	int nb_matches = counter_nb_mathches(map);
 	int line = 0;
 	int check = 1;
-	
+
+	if (nb_matches == 1) {
+		line = search_line_big_matches(line, &check, map);
+		map = remove_matches(map, line, check);
+		my_putstr("AI's turn...\n");
+		print_resume(line, check, 1);
+		print_map(map);
+		return (map);
+	}
 	while (check <= nb_matches)
 		check = check + max_matches + 1;
 	check = check - (max_matches + 1);
@@ -141,7 +149,11 @@ int main(int ac, char **av)
 	if (ac != 3)
 		return (84);
 	nb_line = str_to_int(av[1]);
+	if (nb_line <= 1 || nb_line >= 100)
+		return (84);
 	max_matches = str_to_int(av[2]);
+	if (max_matches <= 0)
+		return (84);
 	map = creat_map(nb_line);
 	return (management_game(map, nb_line, max_matches));
 }

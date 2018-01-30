@@ -17,11 +17,16 @@ SRC	=	src/main.c	\
 		src/get_next_line.c	\
 		src/my_putstr.c
 
-SRC_1	=	src/str_to_int.c	\
-		src/my_strlen.c	\
-		tests/tests.c
+SRC_TEST	=	src/str_to_int.c	\
+			src/my_strlen.c	\
+			src/print.c	\
+			src/my_putstr.c	\
+			src/my_put_nbr.c	\
+			tests/tests.c
 
 CFLAGS	+=	 -I./include -Wall -Wextra -g3
+
+CFLAGS_TEST	+=	--coverage -lcriterion -lgcov -I./include
 
 NAME	=	matchstick
 
@@ -46,7 +51,7 @@ fclean: clean
 re:	fclean all
 
 tests_run:
-	$(CC) -o test $(SRC_1) --coverage -lcriterion -lgcov
+	$(CC) -o test $(SRC_TEST) $(CFLAGS_TEST)
 	./test
 
 .PHONY:	all clean fclean re
