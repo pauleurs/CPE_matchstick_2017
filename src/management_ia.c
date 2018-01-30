@@ -54,7 +54,7 @@ int search_line_big_matches(int line, int *check, char **map)
 {
 	int i = 1;
 	int big = 0;
-	int index = 0;
+	int index = 1;
 	int matches = 0;
 
 	while (map[i] != NULL) {

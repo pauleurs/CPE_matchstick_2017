@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-char **check_invalid_input(char *str, char **map, int *nb)
+int check_invalid_input(char *str)
 {
 	int i = 0;
 
@@ -17,28 +17,30 @@ char **check_invalid_input(char *str, char **map, int *nb)
 		my_putstr("Error: invalid input (positive "	\
 			  "number expected)\n");
 		free (str);
-		return (check_player(map, nb));
+		return (-1);
 	}
 	while (str[i] != '\0') {
 		if (str[i] < '0' || str[i] > '9') {
 			my_putstr("Error: invalid input (positive "	\
 				  "number expected)\n");
 			free (str);
-			return (check_player(map, nb));
+			return (-1);
 		}
 		i = i + 1;
 	}
-	return (NULL);
+	return (0);
 }
 
-char **check_line_out_range(int line, int *nb, char **map)
+int check_line_out_range(int line, int *nb, int check)
 {
+	if (check == -1)
+		return (-1);
 	if (line > nb[0] || line < 1) {
 		my_putstr("Error: this line is out of range\n");
-		return (check_player(map, nb));
+		return (-1);
 	} else
 		my_putstr("Matches: ");
-	return (NULL);
+	return (0);
 }
 
 char **check_player(char **map, int *nb)
@@ -47,20 +49,26 @@ char **check_player(char **map, int *nb)
 	static int matches = 0;
 	static char *str_line = NULL;
 	static char *str_matches = NULL;
+	int check = -1;
 
-	my_putstr("Line: ");
-	str_line = get_next_line(0);
-	if (str_line == NULL)
-		return (NULL);
-	check_invalid_input(str_line, map, nb);
-	line = str_to_int(str_line);
-	check_line_out_range(line, nb, map);
-	str_matches = get_next_line(0);
-	if (str_matches == NULL)
-		return (NULL);
-	check_invalid_input(str_matches, map, nb);
-	matches = str_to_int(str_matches);
-	check_match(nb, map, line, matches);
+	while (check == -1) {
+		my_putstr("Line: ");
+		str_line = get_next_line(0);
+		if (str_line == NULL)
+			return (NULL);
+		check = check_invalid_input(str_line);
+		line = str_to_int(str_line);
+		check = check_line_out_range(line, nb, check);
+		if (check != -1) {
+			str_matches = get_next_line(0);
+			if (str_matches == NULL)
+				return (NULL);
+			check = check_invalid_input(str_matches);
+			matches = str_to_int(str_matches);
+			if (check != -1)
+				check = check_match(map, line, matches, nb);
+		}
+	}
 	print_resume(line, matches, PLAYER);
 	return (remove_matches(map, line, matches));
 }
@@ -76,7 +84,7 @@ int management_game(char **map, int *nb)
 		if (check_win(map, PLAYER) == 0)
 			return (2);
 		map = management_ia(map, nb[1]);
-		if (check_win(map, 1) == IA)
+		if (check_win(map, IA) == 0)
 			return (1);
 	}
 	return (0);

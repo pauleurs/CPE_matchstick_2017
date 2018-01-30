@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-char **check_matches_line(char **map, int line, int matches, int *nb)
+int check_matches_line(char **map, int line, int matches)
 {
 	int i = 0;
 	int nb_matches = 0;
@@ -21,23 +21,22 @@ char **check_matches_line(char **map, int line, int matches, int *nb)
 	}
 	if (nb_matches < matches) {
 		my_putstr("Error: not enough matches on this line\n");
-		return (check_player(map, nb));
+		return (-1);
 	}
-	return (NULL);
+	return (0);
 }
 
-char **check_match(int *nb, char **map, int line, int matches)
+int check_match(char **map, int line, int matches, int *nb)
 {
 	if (matches > nb[1]) {
 		my_putstr("Error: you cannot remove more than ");
 		my_put_nbr(nb[1]);
 		my_putstr(" matches per turn\n");
-		return (check_player(map, nb));
+		return (-1);
 	} if (matches < 1) {
 		my_putstr("Error: you have to remove at least one "	\
 			"match\n");
-		return (check_player(map, nb));
+		return (-1);
 	}
-	check_matches_line(map, line, matches, nb);
-	return (NULL);
+	return (check_matches_line(map, line, matches));
 }
