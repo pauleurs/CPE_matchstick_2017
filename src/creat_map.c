@@ -7,19 +7,26 @@
 
 #include <stdlib.h>
 
-char **malloc_map(int nb_line)
+char **write_first_line(char **map, int nb_line)
 {
 	int i = 0;
-	char **map = malloc((nb_line + 3) * sizeof(char *));
 
-	map[nb_line + 2] = NULL;
-	map[0] = malloc((nb_line * 2 + 2) * sizeof(char));
 	while (i != nb_line * 2 + 1) {
 		map[0][i] = '*';
 		i = i + 1;
 	}
 	map[0][i] = '\0';
-	i = 1;
+	return (map);
+}
+
+char **malloc_map(int nb_line)
+{
+	int i = 1;
+	char **map = malloc((nb_line + 3) * sizeof(char *));
+
+	map[nb_line + 2] = NULL;
+	map[0] = malloc((nb_line * 2 + 2) * sizeof(char));
+	map = write_first_line(map, nb_line);
 	while (i != nb_line + 2) {
 		map[i] = malloc((nb_line * 2 + 2) * sizeof(char));
 		i = i + 1;

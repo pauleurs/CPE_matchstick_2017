@@ -7,10 +7,11 @@
 
 SRC	=	src/main.c	\
 		src/str_to_int.c	\
+		src/remove_matches.c	\
 		src/creat_map.c	\
 		src/my_strlen.c	\
-		src/check_nb_line.c	\
 		src/print.c	\
+		src/management_ia.c	\
 		src/check_win.c	\
 		src/check_match.c	\
 		src/my_put_nbr.c	\
