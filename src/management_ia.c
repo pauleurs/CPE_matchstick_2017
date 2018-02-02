@@ -87,7 +87,7 @@ char **management_ia(char **map, int max_matches)
 	int line = 0;
 	int check = 1;
 
-	my_putstr("\nIA's turn...\n");
+	my_putstr("\nAI's turn...\n");
 	if (nb_matches == 1) {
 		line = search_line_big_matches(line, &check, map);
 		map = remove_matches(map, line, check);
