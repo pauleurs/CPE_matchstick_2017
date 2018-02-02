@@ -95,8 +95,9 @@ char **management_ia(char **map, int max_matches)
 		print_map(map);
 		return (map);
 	}
-	while (check <= nb_matches)
+	while (check < nb_matches) {
 		check = check + max_matches + 1;
+	}
 	check = check - (max_matches + 1);
 	check = nb_matches - check;
 	line = searche_nb_matches(map, check);
