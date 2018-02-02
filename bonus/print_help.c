@@ -16,16 +16,16 @@ static void print_help_1(int select)
 	mvprintw(1, (COLS/2) - 3, "HELP :");
 	if (select == 0) {
 		attron(A_DIM | A_STANDOUT);
-		mvprintw(LINES/2, 1, "RESUME");
+		mvprintw(LINES / 2, 1, "RESUME");
 		attroff(A_DIM | A_STANDOUT);
 	} else
-		mvprintw(LINES/2, 1, "RESUME");
+		mvprintw(LINES / 2, 1, "RESUME");
 	if (select == 1) {
 		attron(A_DIM | A_STANDOUT);
-		mvprintw(LINES/2, COLS - 5, "EXIT");
+		mvprintw(LINES / 2, COLS - 5, "EXIT");
 		attroff(A_DIM | A_STANDOUT);
 	} else
-		mvprintw(LINES/2, COLS - 5, "EXIT");
+		mvprintw(LINES / 2, COLS - 5, "EXIT");
 	refresh();
 }
 

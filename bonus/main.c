@@ -25,7 +25,8 @@ void print_map(char **map, int size)
 	int size_line = my_strlen(map[0]);
 
 	while (map[i] != NULL) {
-		mvprintw((LINES/2) + (i - (size/2)), (COLS/2) - (size_line)/2, map[i]);
+		mvprintw((LINES / 2) + (i - (size / 2)), \
+			(COLS / 2) - (size_line) / 2, map[i]);
 		i = i + 1;
 	}
 	refresh();
@@ -38,12 +39,12 @@ int main(void)
 	ncurses();
 	game = selected_mod_game();
 	if (game == 1) {
-		mvprintw((LINES/2), (COLS/2) - 5, "TWO PLAYER");
+		mvprintw((LINES / 2), (COLS / 2) - 5, "TWO PLAYER");
 		refresh();
 		usleep(900000);
 		management_two_player();
 	} else if (game == 2) {
-		mvprintw((LINES/2), (COLS/2) - 6, "PLAYER VS IA");
+		mvprintw((LINES / 2), (COLS / 2) - 6, "PLAYER VS IA");
 		refresh();
 		usleep(900000);
 	} else if (game == 3)

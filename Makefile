@@ -32,7 +32,12 @@ SRC_BONUS	=	bonus/print_help.c	\
 			bonus/management_two_player.c	\
 			bonus/choose_game.c	\
 			bonus/main.c	\
+			bonus/parametre_game.c	\
+			bonus/player_one.c	\
+			bonus/management_name_player.c	\
+			bonus/print_map.c	\
 			src/creat_map.c	\
+			bonus/player_two.c	\
 			src/remove_matches.c	\
 			src/my_strlen.c
 
