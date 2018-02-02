@@ -23,6 +23,8 @@ SRC_TEST	=	src/str_to_int.c	\
 			src/my_strlen.c	\
 			src/print.c	\
 			src/my_putstr.c	\
+			src/get_next_line.c	\
+			tests/tests_1.c	\
 			src/my_put_nbr.c	\
 			tests/tests.c
 
@@ -34,7 +36,7 @@ SRC_BONUS	=	bonus/print_help.c	\
 			src/remove_matches.c	\
 			src/my_strlen.c
 
-CFLAGS	+=	 -I./include -Wall -Wextra -g3
+CFLAGS	+=	 -I./include -Wall -Wextra
 
 CFLAGS_TEST	+=	--coverage -lcriterion -lgcov -I./include
 

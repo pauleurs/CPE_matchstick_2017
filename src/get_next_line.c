@@ -93,7 +93,7 @@ char *get_next_line(int fd)
 		while (size_read != 0 && i != READ_SIZE && buff[i] != '\n')
 			i = i + 1;
 		if (size_read != 0) {
-			if ((line = new_line(line, buff, rest, \
+			if ((line = new_line(line, buff, rest,		\
 					size_read, check)) == NULL)
 				return (NULL);
 			check = 1;

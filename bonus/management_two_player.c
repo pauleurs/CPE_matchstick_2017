@@ -32,7 +32,6 @@ int size_map_ask(void)
 		refresh();
 		touch = getch();
 	}
-	clear();
 	return (size);
 }
 
@@ -86,42 +85,95 @@ char **name_player(void)
 	return (name);
 }
 
-int print_name_player(char **name)
+int print_name_player(char **name, int player)
 {
-	int size = 0;
-	int size_1 = 0;
+	int size = my_strlen(name[player]);
 
-	if (name == NULL)
-		return (0);
 	attron(A_UNDERLINE | A_BOLD);
-	size = my_strlen(name[0]);
-	size_1 = my_strlen(name[1]);
-	move(0, size/2);
-	printw("%s\n", name[0]);
-	move(0, COLS - size_1 - (size_1 / 2));
-	printw("%s\n", name[1]);
+	move(0, COLS / 2 - size / 2);
+	printw("%s\n", name[player]);
 	attroff(A_UNDERLINE | A_BOLD);
 	refresh();
 	return (0);
 }
 
-int recover_nb_line(int *matches)
+void print_map_two_player(char **map, int size, int line)
 {
-	int line = 0;
-	int tempo = 0;
-	static int round = 1;
+	int i = 0;
+	int size_line = my_strlen(map[0]);
 
-	move(2, 1);
-	printw("round : %d\n",round);
-	mvprintw(3, 1, "Line: ");
-	move(3, 8);
-	scanw("%d", &line);
-	mvprintw(3, 15, "Matches: ");
-	move(3, 25);
-	scanw("%d", &tempo);
-	*matches = tempo;
-	round = round + 1;
-	return (line);
+	mvprintw((LINES/2) + (line - (size/2)), (COLS/2) - (size_line)/2  - 2, "->");
+	while (map[i] != NULL) {
+		if (i == line) {
+			attron(A_DIM);
+			mvprintw((LINES/2) + (i - (size/2)), (COLS/2) - (size_line)/2, map[i]);
+			attroff(A_DIM);
+		} else
+			mvprintw((LINES/2) + (i - (size/2)), (COLS/2) - (size_line)/2, map[i]);
+		i = i + 1;
+	}
+	refresh();
+}
+
+int nb_matches_line(int line, char **map)
+{
+	int i = 1;
+	int nb_matches = 0;
+
+	while (map[line][i] != '\0') {
+		if (map[line][i] == '|')
+			nb_matches = nb_matches + 1;
+		i = i + 1;
+	}
+	return (nb_matches);
+}
+
+void choose_line(char **map, int *line, char **name, int size)
+{
+	int touch = 0;
+	int check = 0;
+
+	while (check == 0) {
+		while (touch != 10) {
+			if (touch == 258 && *line != size)
+				*line = *line + 1;
+			else if (touch == 259 && *line != 1)
+				*line = *line - 1;
+			print_map_two_player(map, size, *line);
+			print_name_player(name, 0);
+			refresh();
+			touch = getch();
+			clear();
+		}
+		touch = 0;
+		check = nb_matches_line(*line, map);
+		if (check == 0)
+			mvprintw(1, (COLS / 2) - 5, "LINE EMPTY");
+		refresh();
+	}
+}
+
+void recover_nb_line(int size, char **map, char **name, int max_matches)
+{
+	int touch = 0;
+	int line = 0;
+	int delect = 0;
+	
+	while (nb_matches_line(line, map) == 0)
+		line = line + 1;
+	print_map_two_player(map, size, line);
+	choose_line(map, &line, name, size);
+	while (touch != 10) {
+		clear();
+		print_name_player(name, 0);
+		if (touch == 32 && nb_matches_line(line, map) != 0 && delect != max_matches) {
+			map = remove_matches(map, line, 1);
+			delect = delect + 1;
+		}
+		print_map_two_player(map, size, line);
+		refresh();
+		touch = getch();
+	}
 }
 
 int management_two_player(void)
@@ -135,10 +187,7 @@ int management_two_player(void)
 
 	while (1) {
 		clear();
-		print_name_player(name);
-		print_map(map, size);
-		line =recover_nb_line(&matches);
-		map = remove_matches(map, line, matches);
+		recover_nb_line(size, map, name, max_matches);
 		refresh();
 	}
 	return (0);
