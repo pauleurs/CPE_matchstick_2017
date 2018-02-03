@@ -69,7 +69,8 @@ char **check_player(char **map, int *nb, int check)
 		if (check != -1) {
 			str_matches = get_next_line(0);
 			if (str_matches == NULL)
-				check = check_invalid_input(str_matches);
+				return (NULL);
+			check = check_invalid_input(str_matches);
 			matches = str_to_int(str_matches);
 			if (check != -1)
 				check = check_match(map, line, matches, nb);
