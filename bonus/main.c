@@ -47,6 +47,7 @@ int main(void)
 		mvprintw((LINES / 2), (COLS / 2) - 6, "PLAYER VS IA");
 		refresh();
 		usleep(900000);
+		management_ai_player();
 	} else if (game == 3)
 		print_help();
 	endwin();

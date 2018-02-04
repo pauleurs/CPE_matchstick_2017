@@ -36,6 +36,7 @@ SRC_BONUS	=	bonus/print_help.c	\
 			bonus/player_one.c	\
 			bonus/management_name_player.c	\
 			bonus/print_map.c	\
+			bonus/ai_player.c	\
 			src/creat_map.c	\
 			bonus/player_two.c	\
 			src/remove_matches.c	\

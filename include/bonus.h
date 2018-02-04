@@ -5,6 +5,8 @@
 ** paul-emile.leurs@epitech.eu
 */
 
+#ifndef BONUS_H_
+# define BONUS_H_
 void recover_nb_line_2(int size, char **map, char **name, int max_matches);
 void print_map_two_player(char **map, int size, int line, int player);
 char **creat_map(int nb_line);
@@ -24,3 +26,5 @@ int max_matches_ask(void);
 void choose_line(char **map, int *line, char **name, int size);
 char **creat_matches(char **map, int line);
 int compteur(int touch, int min, int max, int nb);
+void management_ai_player(void);
+#endif

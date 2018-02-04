@@ -34,10 +34,10 @@ char **name_player(void)
 	name[1] = malloc((20) * sizeof(char *));
 	if (name == NULL || name[0] == NULL || name[1] == NULL)
 		return (NULL);
-	mvprintw((LINES / 2) - 10, (COLS / 2) - 25, "Name Player 1 (max 20) : ");
+	mvprintw((LINES / 2) - 10, (COLS / 2) - 25, "Name Player 1 (max 20) :");
 	move((LINES / 2 - 10), COLS / 2);
 	getnstr(name[0], 20);
-	mvprintw((LINES / 2) - 6, (COLS / 2) - 25, "Name Player 2 (max 20) : ");
+	mvprintw((LINES / 2) - 6, (COLS / 2) - 25, "Name Player 2 (max 20) :");
 	move((LINES / 2 - 6), COLS / 2);
 	getnstr(name[1], 20);
 	refresh();

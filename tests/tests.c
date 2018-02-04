@@ -57,5 +57,5 @@ Test (print_resume_player, simple_map, .init = redirect_all_std)
 Test (print_resume_ia, simple_map, .init = redirect_all_std)
 {
 	print_resume(1, 10, 1);
-	cr_assert_stdout_eq_str("IA removed 10 match(es) from line 1\n");
+	cr_assert_stdout_eq_str("AI removed 10 match(es) from line 1\n");
 }

@@ -83,7 +83,7 @@ int management_two_player(void)
 		clear();
 		recover_nb_line_2(size, map, name, max_matches);
 		if (check_win(map, 0, name) == 0)
-                        return (0);
+			return (0);
 		refresh();
 	}
 	return (0);

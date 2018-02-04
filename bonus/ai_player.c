@@ -1,13 +1,15 @@
 /*
 ** EPITECH PROJECT, 2018
-** ia
+** ai_vs_player
 ** File description:
-** paul_emile.leurs@epitech.eu
+** paul-emile.leurs@epitech.eu
 */
 
-#include "my.h"
+#include <ncurses.h>
+#include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "bonus.h"
 
 int counter_nb_mathches(char **map)
 {
@@ -74,26 +76,15 @@ int search_line_big_matches(int line, int *check, char **map)
 	return (line);
 }
 
-static char **print_map_ia(char **map, int line, int check)
-{
-	map = remove_matches(map, line, check);
-	print_resume(line, check, IA);
-	print_map(map);
-	return (map);
-}
-
-char **management_ia(char **map, int max_matches)
+char **management_ia_bonus(char **map, int max_matches)
 {
 	int nb_matches = counter_nb_mathches(map);
 	int line = 0;
 	int check = 1;
 
-	my_putstr("\nAI's turn...\n");
 	if (nb_matches == 1) {
 		line = search_line_big_matches(line, &check, map);
 		map = remove_matches(map, line, check);
-		print_resume(line, check, IA);
-		print_map(map);
 		return (map);
 	}
 	while (check < nb_matches) {
@@ -104,5 +95,26 @@ char **management_ia(char **map, int max_matches)
 	line = searche_nb_matches(map, check);
 	if (line == -1)
 		line = search_line_big_matches(line, &check, map);
-	return (print_map_ia(map, line, check));
+	move(3, COLS / 2 - 18);
+	printw("line select : %d && %d matche(s) remove", line, check);
+	return (remove_matches(map, line, check));
+}
+
+void management_ai_player(void)
+{
+	int size = size_map_ask();
+	int max_matches = max_matches_ask();
+	char **map = creat_map(size);
+	char *name[2] = {"player", "ai"};
+
+	while (1) {
+		clear();
+		recover_nb_line_1(size, map, name, max_matches);
+		clear();
+		mvprintw(0, (COLS / 2) - 2, "AI :");
+		map = management_ia_bonus(map, max_matches);
+		print_map(map, size);
+		refresh();
+		sleep(2);
+	}
 }

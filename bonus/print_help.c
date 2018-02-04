@@ -13,7 +13,7 @@
 
 static void print_help_1(int select)
 {
-	mvprintw(1, (COLS/2) - 3, "HELP :");
+	mvprintw(1, (COLS / 2) - 3, "HELP :");
 	if (select == 0) {
 		attron(A_DIM | A_STANDOUT);
 		mvprintw(LINES / 2, 1, "RESUME");
