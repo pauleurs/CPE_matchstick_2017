@@ -15,14 +15,14 @@ int check_invalid_input(char *str)
 
 	if (str[0] == '\0') {
 		my_putstr("Error: invalid input (positive "     \
-			  "number expected)\n");
+			"number expected)\n");
 		free (str);
 		return (-1);
 	}
 	while (str[i] != '\0') {
 		if (str[i] < '0' || str[i] > '9') {
 			my_putstr("Error: invalid input (positive "     \
-				  "number expected)\n");
+				"number expected)\n");
 			free (str);
 			return (-1);
 		}

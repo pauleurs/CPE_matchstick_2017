@@ -11,6 +11,11 @@
 #include <unistd.h>
 #include "bonus.h"
 
+static void print_help_2(void)
+{
+	mvprintw(4, (COLS / 2) - 7, "MATCHSTICK GAME");
+}
+
 static void print_help_1(int select)
 {
 	mvprintw(1, (COLS / 2) - 3, "HELP :");
@@ -26,6 +31,7 @@ static void print_help_1(int select)
 		attroff(A_DIM | A_STANDOUT);
 	} else
 		mvprintw(LINES / 2, COLS - 5, "EXIT");
+	print_help_2();
 	refresh();
 }
 

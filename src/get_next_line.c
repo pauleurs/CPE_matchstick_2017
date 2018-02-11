@@ -20,7 +20,7 @@ static char *str_cpy(char *dest, char *str, int *i, int index)
 	return (dest);
 }
 
-char *new_line(char *line, char *buff, char *rest, int size_read, int check)
+char *new_line(char *line, char *buff, char *rest, int size_read)
 {
 	int i = 0;
 	int index = 0;
@@ -28,7 +28,7 @@ char *new_line(char *line, char *buff, char *rest, int size_read, int check)
 
 	if (tempo == NULL)
 		return (NULL);
-	if (rest != NULL && check == 0)
+	if (rest != NULL)
 		tempo = str_cpy(tempo, rest, &i, 0);
 	if (line != NULL) {
 		tempo = str_cpy(tempo, line, &i, 0);
@@ -80,7 +80,6 @@ char *get_next_line(int fd)
 	char *line = NULL;
 	static int size_read = READ_SIZE;
 	static char *rest = NULL;
-	int check = 0;
 	char *buff = malloc((READ_SIZE) * sizeof(char));
 
 	if (size_read == 0 || (size_read != i && fd != 0) || \
@@ -94,9 +93,8 @@ char *get_next_line(int fd)
 			i = i + 1;
 		if (size_read != 0) {
 			if ((line = new_line(line, buff, rest,		\
-					size_read, check)) == NULL)
+					size_read)) == NULL)
 				return (NULL);
-			check = 1;
 		}
 	}
 	if (READ_SIZE != 1)
