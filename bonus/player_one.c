@@ -45,7 +45,7 @@ void delect_matches(char **map, int *parametre, char **name, int size)
 		clear();
 		print_name_player(name, 0);
 		if (touch == 32 && nb_matches_line(line, map)	\
-		!= 0 && delect != parametre[1]) {
+		!= 0 && delect != parametre[1] - 1) {
 			map = remove_matches(map, line, 1);
 			delect = delect + 1;
 		} else if (touch == 263 && delect != 0) {

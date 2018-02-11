@@ -13,6 +13,7 @@ char **creat_map(int nb_line);
 char **remove_matches(char **map, int line, int matches);
 char **name_player(void);
 int print_name_player(char **name, int player);
+int check_win(char **map, int player, char **name);
 int my_strlen(char *str);
 int selected_mod_game(void);
 int print_help(void);
@@ -26,5 +27,5 @@ int max_matches_ask(void);
 void choose_line(char **map, int *line, char **name, int size);
 char **creat_matches(char **map, int line);
 int compteur(int touch, int min, int max, int nb);
-void management_ai_player(void);
+int management_ai_player(void);
 #endif

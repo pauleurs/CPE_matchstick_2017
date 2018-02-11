@@ -100,20 +100,24 @@ char **management_ia_bonus(char **map, int max_matches)
 	return (remove_matches(map, line, check));
 }
 
-void management_ai_player(void)
+int management_ai_player(void)
 {
 	int size = size_map_ask();
 	int max_matches = max_matches_ask();
 	char **map = creat_map(size);
-	char *name[2] = {"player", "ai"};
+	char *name[2] = {"You", "IA"};
 
 	while (1) {
 		clear();
 		recover_nb_line_1(size, map, name, max_matches);
+		if (check_win(map, 1, name) == 0)
+			return (0);
 		clear();
 		mvprintw(0, (COLS / 2) - 2, "AI :");
 		map = management_ia_bonus(map, max_matches);
 		print_map(map, size);
+		if (check_win(map, 0, name) == 0)
+			return (0);
 		refresh();
 		sleep(2);
 	}
